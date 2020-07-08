@@ -1,24 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
+/** @jsx jsx */
+import { jsx } from "@emotion/core";
 import './App.css';
+import CourseList from "./CourseList";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1 css={{ padding: "40px"}}> ICE Sucks</h1>
       </header>
+      <p> ICE sucks. Here's a list of blended and in-person courses for NYU. </p>
+      <div css={{ width: "100vw", display: "flex", flexDirection: "column", alignItems: "center"}}>
+      <CourseList/>
+      </div>
     </div>
   );
 }
