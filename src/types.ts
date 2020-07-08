@@ -61,3 +61,5 @@ export type IRequirement =
   num: number;
   args: Array<IRequirement>;
 };
+
+export type ICourses = { [school: string]: { [subject: string]: ICourse[] }}

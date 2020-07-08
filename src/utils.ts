@@ -84,3 +84,19 @@ export function findCoreReqs(
     `${subjectCode.toLowerCase()}-${schoolCode.toLowerCase()}-${deptCourseId}`
   );
 }
+
+
+export const debounce = (func: Function, wait: number) => {
+  let timeout: NodeJS.Timeout | null;
+
+  return function executedFunction(...args: any) {
+    const later = () => {
+      timeout = null;
+      func(...args);
+    };
+
+    timeout && clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
+
