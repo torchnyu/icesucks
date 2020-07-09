@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
-import React from "react";
-import Section from "./Section";
-import { ISection } from "./types";
+import { jsx } from '@emotion/core';
+import React from 'react';
+import Section from './Section';
+import { ISection } from './types';
 
 interface Props {
   sections: Array<ISection> | null;
@@ -11,33 +11,39 @@ interface Props {
 }
 
 const SectionsList: React.FC<Props> = ({
-                                         sections,
-                                         displayDescription,
-                                         displayNotes
-                                       }) => {
+  sections,
+  displayDescription,
+  displayNotes,
+}) => {
   if (!sections) {
     return <div></div>;
   }
   return (
     <div>
       {sections.map((section, i) => {
-          if (!section) {
-              return <div key={i}></div>
-          }
-          return <div css={{ padding: "10px" }} key={section.registrationNumber}>
-          <Section isOdd={!!(i % 2)} {...section} />
-          {section.recitations && (
-            <SectionsList
-              sections={section.recitations}
-              displayDescription={false}
-              displayNotes={false}
+        if (!section) {
+          return <div key={i}></div>;
+        }
+        return (
+          <div key={section.registrationNumber}>
+            <Section
+              isOdd={!!(i % 2)}
+              {...section}
+              isLast={i === sections.length - 1}
             />
-          )}
-          {displayDescription && (
-            <p>{section.description || "No description available"}</p>
-          )}
-          {displayNotes && <p> {section.notes}</p>}
-        </div>
+            {section.recitations && (
+              <SectionsList
+                sections={section.recitations}
+                displayDescription={false}
+                displayNotes={false}
+              />
+            )}
+            {displayDescription && (
+              <p>{section.description || 'No description available'}</p>
+            )}
+            {displayNotes && <p> {section.notes}</p>}
+          </div>
+        );
       })}
     </div>
   );
