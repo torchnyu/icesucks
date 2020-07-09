@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import moment from 'moment';
 import React from 'react';
 import { IMeeting, ISection } from './types';
 import { fixCredit } from './utils';
@@ -94,6 +93,10 @@ const styles = {
     color: 'grey',
     fontSize: '0.85rem',
   },
+  label: {
+    fontSize: '0.75rem',
+    color: 'grey',
+  },
 } as const;
 
 const Section: React.FC<Props> = ({
@@ -110,18 +113,6 @@ const Section: React.FC<Props> = ({
   registrationNumber,
   instructionMode,
 }) => {
-  const meetingDateTimes = [];
-  const meetingDays: string[] = [];
-  const meetingTimes: string[] = [];
-  meetings?.forEach((m) => {
-    const dateTime = moment.utc(m.beginDate);
-    meetingDateTimes.push(dateTime);
-    meetingDays.push(dateTime.format('ddd'));
-    const endTime = dateTime.clone().add(m.minutesDuration, 'minutes');
-    meetingTimes.push(
-      `${dateTime.format('h:mm A')}-${endTime.format('h:mm A')}`
-    );
-  });
   return (
     <div css={styles.Section(isOdd, isLast)}>
       <div css={styles.row}>
@@ -131,9 +122,9 @@ const Section: React.FC<Props> = ({
           </span>
           <span css={[styles.status(status), styles.statusText]}>{status}</span>
         </div>
-        {/* Course Registration Number */}
-        <div css={styles.registration}>{registrationNumber}</div>
-        {/* Course Instructor(s) */}
+        {/* Section Registration Number */}
+        <div css={styles.registration}>#{registrationNumber}</div>
+        {/* Section Instructor(s) */}
         <div
           css={{
             display: 'flex',
@@ -144,7 +135,7 @@ const Section: React.FC<Props> = ({
         >
           <div> {instructors.join(', ')} </div>
         </div>
-        {/* Course Type */}
+        {/* Section Type */}
         <div
           css={{
             display: 'flex',
@@ -155,27 +146,16 @@ const Section: React.FC<Props> = ({
         >
           <div> {type} </div>
         </div>
-        {/* Course Credits */}
+        {/* Section Credits */}
         <div css={{ width: '40px', maxWidth: '50vw', padding: '5px' }}>
           {' '}
           {fixCredit(minUnits, maxUnits)}
+          <div css={styles.label}>
+            {fixCredit(minUnits, maxUnits) === '1' ? 'UNIT' : 'UNITS'}
+          </div>
         </div>
+        {/* Section meeting days and times */}
         <SectionMeetings meetings={meetings} />
-        {/* <div css={{ width: '50px', padding: '5px' }}>
-          {meetingDays.join('\t')}{' '}
-        </div>
-        <div
-          css={{
-            display: 'flex',
-            flexDirection: 'column',
-            width: '100px',
-            padding: '5px',
-          }}
-        >
-          {meetingTimes.map((time, i) => (
-            <div key={i}> {time} </div>
-          ))}
-        </div> */}
       </div>
     </div>
   );
