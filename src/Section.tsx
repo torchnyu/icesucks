@@ -4,6 +4,7 @@ import moment from 'moment';
 import React from 'react';
 import { IMeeting, ISection } from './types';
 import { fixCredit } from './utils';
+import SectionMeetings from './SectionMeetings';
 
 interface Props {
   type: string;
@@ -159,7 +160,8 @@ const Section: React.FC<Props> = ({
           {' '}
           {fixCredit(minUnits, maxUnits)}
         </div>
-        <div css={{ width: '50px', padding: '5px' }}>
+        <SectionMeetings meetings={meetings} />
+        {/* <div css={{ width: '50px', padding: '5px' }}>
           {meetingDays.join('\t')}{' '}
         </div>
         <div
@@ -173,7 +175,7 @@ const Section: React.FC<Props> = ({
           {meetingTimes.map((time, i) => (
             <div key={i}> {time} </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

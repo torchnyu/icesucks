@@ -3,11 +3,11 @@ import { jsx } from '@emotion/core';
 import React from 'react';
 
 interface Props {
-  meetingDays: Array<string>;
-  meetingTimes: Array<string>;
+  meetings: Array<Object>;
 }
 
-const SectionMeetings: React.FC<Props> = ({ meetingDays, meetingTimes }) => {
+const SectionMeetings: React.FC<Props> = ({ meetings }) => {
+  console.log(meetings);
   return <div></div>;
 };
 
