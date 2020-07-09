@@ -49,6 +49,7 @@ const styles = {
       display: 'flex',
       flexDirection: 'column',
       backgroundColor: isOdd ? '#F1F1F1' : '#F6F6F6',
+      color: '#31343B',
       borderBottomLeftRadius: isLast ? '8px' : '0px',
       borderBottomRightRadius: isLast ? '8px' : '0px',
     } as const),
@@ -63,6 +64,7 @@ const styles = {
       paddingLeft: '30px',
     },
     minHeight: '80px',
+    position: 'relative',
   },
   statusContainer: {
     width: '100px',
@@ -84,6 +86,13 @@ const styles = {
   mode: (instructionMode: string) => ({
     color: getInstructionColor(instructionMode),
   }),
+  registration: {
+    position: 'absolute',
+    top: '6px',
+    right: '6px',
+    color: 'grey',
+    fontSize: '0.85rem',
+  },
 } as const;
 
 const Section: React.FC<Props> = ({
@@ -122,17 +131,7 @@ const Section: React.FC<Props> = ({
           <span css={[styles.status(status), styles.statusText]}>{status}</span>
         </div>
         {/* Course Registration Number */}
-        <div
-          css={{
-            width: '50px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          {' '}
-          {registrationNumber}{' '}
-        </div>
+        <div css={styles.registration}>{registrationNumber}</div>
         {/* Course Instructor(s) */}
         <div
           css={{
